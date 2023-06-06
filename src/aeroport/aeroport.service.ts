@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAeroportDto } from './dto/create-aeroport.dto';
 import { UpdateAeroportDto } from './dto/update-aeroport.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Aeroport, AeroportDocument } from './schemas/aeroport.schemas';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AeroportService {
-  create(createAeroportDto: CreateAeroportDto) {
-    return 'This action adds a new aeroport';
+  constructor(@InjectModel(Aeroport.name) private aeroportModel: Model<AeroportDocument>) {}
+
+  async create(createAeroportDto: CreateAeroportDto): Promise<AeroportDocument> {
+    const createdAeroport = new this.aeroportModel(createAeroportDto);
+    return createdAeroport.save();
   }
 
-  findAll() {
-    return `This action returns all aeroport`;
+  async findAll(): Promise<AeroportDocument[]> {
+    return this.aeroportModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} aeroport`;
+  async findById(id: string): Promise<AeroportDocument> {
+    return this.aeroportModel.findById(id);
   }
 
-  update(id: number, updateAeroportDto: UpdateAeroportDto) {
-    return `This action updates a #${id} aeroport`;
+  async findByName(name: string): Promise<AeroportDocument> {
+    return this.aeroportModel.findOne({ name }).exec();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} aeroport`;
+  async findByCountry(country: string): Promise<AeroportDocument[]> {
+    return this.aeroportModel.find({ country }).exec();
+  }
+
+  async findByCity(city: string): Promise<AeroportDocument[]> {
+    return this.aeroportModel.find({ city }).exec();
+  }
+
+  async update(id: string, updateAeroportDto: UpdateAeroportDto): Promise<AeroportDocument> {
+    return this.aeroportModel
+      .findByIdAndUpdate(id, updateAeroportDto, { new: true })
+      .exec();
+  }
+
+  async remove(id: string): Promise<AeroportDocument> {
+    return this.aeroportModel.findByIdAndDelete(id).exec();
   }
 }
