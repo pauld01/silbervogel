@@ -19,16 +19,16 @@ export class AeroportController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.aeroportService.findOne(+id);
+    return this.aeroportService.findById(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAeroportDto: UpdateAeroportDto) {
-    return this.aeroportService.update(+id, updateAeroportDto);
+    return this.aeroportService.update(id, updateAeroportDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.aeroportService.remove(+id);
+    return this.aeroportService.remove(id);
   }
 }
