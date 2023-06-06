@@ -8,7 +8,7 @@ export class Avion {
   @Prop({ required: true })
   identification: string;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   brand: string;
 
   @Prop({ required: true })
