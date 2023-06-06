@@ -5,7 +5,7 @@ export type AvionDocument = Avion & Document;
 
 @Schema()
 export class Avion {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   identification: string;
 
   @Prop({ required: true })
