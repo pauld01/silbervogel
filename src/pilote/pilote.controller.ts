@@ -25,7 +25,7 @@ export class PiloteController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePiloteDto: UpdatePiloteDto) {
-    return this.piloteService.update(+id, updatePiloteDto);
+    return this.piloteService.update(id, updatePiloteDto);
   }
 
   @Delete(':id')
