@@ -7,7 +7,7 @@ import { Aeroport, AeroportSchema } from './schemas/aeroport.schemas';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Aeroport.name, schema: AeroportSchema }]),
-    MongooseModule.forRoot('mongodb+srv://silbervogel-aeroport-1e18f247.mongo.ondigitalocean.com')
+    MongooseModule.forRoot('mongodb+srv://doadmin:f8KRg361rA90y7m2@silbervogel-aeroport-1e18f247.mongo.ondigitalocean.com/aeroport?authSource=admin&replicaSet=silbervogel-aeroport&tls=true')
   ],
   controllers: [AeroportController],
   providers: [AeroportService],
