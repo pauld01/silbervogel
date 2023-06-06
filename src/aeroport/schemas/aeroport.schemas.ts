@@ -11,23 +11,18 @@ export type AeroportDocument = Aeroport & Document;
 export class Aeroport {
 
   @Prop({ required: true, unique: true })
-
   id: string;
 
   @Prop({ required: true })
-
   name: string;
 
   @Prop({ required: true })
-
   country: string;
 
   @Prop({ required: true })
-
   city: string;
 
   @Prop()
-
   refreshToken: string;
 
 }
