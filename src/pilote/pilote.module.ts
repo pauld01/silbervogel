@@ -9,7 +9,6 @@ import { PiloteSchema } from './schemas/pilote.schemas';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Pilote.name, schema: PiloteSchema }]),
-    MongooseModule.forRoot('mongodb+srv://doadmin:@'),
   ],
   controllers: [PiloteController],
   providers: [PiloteService],
