@@ -13,7 +13,7 @@ export class AvionController {
     return this.avionService.create(createAvionDto);
   }
 
-  @Get('avion')
+  @Get()
   findAll() {
     return this.avionService.findAll();
   }

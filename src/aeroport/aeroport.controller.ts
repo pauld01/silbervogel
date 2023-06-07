@@ -13,7 +13,7 @@ export class AeroportController {
     return this.aeroportService.create(createAeroportDto);
   }
 
-  @Get('aeroport')
+  @Get()
   findAll() {
     return this.aeroportService.findAll();
   }
