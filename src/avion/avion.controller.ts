@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AvionService } from './avion.service';
 import { CreateAvionDto } from './dto/create-avion.dto';
@@ -12,7 +13,7 @@ export class AvionController {
     return this.avionService.create(createAvionDto);
   }
 
-  @Get()
+  @Get('avion')
   findAll() {
     return this.avionService.findAll();
   }

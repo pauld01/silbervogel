@@ -9,7 +9,7 @@ import { PiloteSchema } from './schemas/pilote.schemas';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Pilote.name, schema: PiloteSchema }]),
-    MongooseModule.forRoot('mongodb+srv://doadmin:W3H67f0nc85zT12S@silbervogel-pilote-c0dbe9a6.mongo.ondigitalocean.com/pilote?replicaSet=silbervogel-pilote&tls=true&authSource=admin'),
+    MongooseModule.forRoot('mongodb+srv://doadmin:@'),
   ],
   controllers: [PiloteController],
   providers: [PiloteService],

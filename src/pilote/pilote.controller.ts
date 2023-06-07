@@ -13,7 +13,7 @@ export class PiloteController {
     return this.piloteService.create(createPiloteDto);
   }
 
-  @Get()
+  @Get('pilote')
   findAll() {
     return this.piloteService.findAll();
   }

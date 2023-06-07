@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AeroportService } from './aeroport.service';
 import { CreateAeroportDto } from './dto/create-aeroport.dto';
@@ -12,7 +13,7 @@ export class AeroportController {
     return this.aeroportService.create(createAeroportDto);
   }
 
-  @Get()
+  @Get('aeroport')
   findAll() {
     return this.aeroportService.findAll();
   }
