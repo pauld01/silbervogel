@@ -24,5 +24,4 @@ export class Pilote {
 
 }
 
-
 export const PiloteSchema = SchemaFactory.createForClass(Pilote);
