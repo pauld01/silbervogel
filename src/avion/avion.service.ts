@@ -49,5 +49,4 @@ export class AvionService {
    async remove(identification: string) {
     this.avionModel.findByIdAndDelete(identification).exec();
   }
-
 }
