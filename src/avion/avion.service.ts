@@ -38,13 +38,16 @@ export class AvionService {
     identification: string,
     updateAvionDto: UpdateAvionDto,
   ): Promise<AvionDocument> {
-    return this.avionModel
-      .findByIdAndUpdate(identification, updateAvionDto, { new: true })
-      .exec();
+    return this.avionModel.findByIdAndUpdate(identification, updateAvionDto, { new: true }).exec();
   }
 
-  async remove(identification: string): Promise<AvionDocument> {
-    return this.avionModel.findByIdAndDelete(identification).exec();
+  /**
+   * This action removes 'avion' depending on the id
+   * @param identification 
+   * @returns 
+   */
+   async remove(identification: string) {
+    this.avionModel.findByIdAndDelete(identification).exec();
   }
 
 }

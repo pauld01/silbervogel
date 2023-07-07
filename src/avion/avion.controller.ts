@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AvionService } from './avion.service';
 import { CreateAvionDto } from './dto/create-avion.dto';
+import { DeleteAvionDto } from './dto/delete-avion.dto';
 import { UpdateAvionDto } from './dto/update-avion.dto';
 
 @Controller('avion')
@@ -28,7 +29,7 @@ export class AvionController {
   }
 
   @Delete(':identification')
-  remove(@Param('identification') identification: string) {
+  delete(@Param('identification') identification: string){
     return this.avionService.remove(identification);
   }
 }
