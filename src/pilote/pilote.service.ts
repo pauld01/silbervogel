@@ -12,6 +12,16 @@ export class PiloteService {
   constructor(@InjectModel(Pilote.name) private piloteModel: Model<PiloteDocument>) {}
 
   /**
+   * This action returns all aviosn from a pilote
+   * @param createPiloteDto
+   * @returns
+   */
+  /*async getPiloteAvions(id: string): Promise<AvionDocument[]> {
+    const pilote = await this.piloteModel.findById(id).exec();
+    return this.avionModel.find({ pilote: pilote._id }).exec();
+  }*/
+
+  /**
    * This action create an pilote
    * @param createPiloteDto 
    * @returns 
@@ -39,7 +49,7 @@ export class PiloteService {
    * @param id 
    * @returns 
    */
-  async findOne(id: number): Promise<PiloteDocument> {
+  async findOne(id: string): Promise<PiloteDocument> {
 
     return this.piloteModel.findById(id);
 
@@ -84,7 +94,7 @@ export class PiloteService {
    * @param id 
    * @returns 
    */
-  async remove(id: number) {
+  async remove(id: string) {
     this.piloteModel.findByIdAndDelete(id).exec();
   }
 }

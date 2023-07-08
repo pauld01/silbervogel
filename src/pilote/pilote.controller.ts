@@ -20,8 +20,13 @@ export class PiloteController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.piloteService.findOne(+id);
+    return this.piloteService.findOne(id);
   }
+
+  /*@Get(':id/avions')
+  getPiloteAvions(@Param('id') id: number) {
+    return this.piloteService.getPiloteAvions(id);
+  }*/
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePiloteDto: UpdatePiloteDto) {
@@ -30,6 +35,6 @@ export class PiloteController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.piloteService.remove(+id);
+    return this.piloteService.remove(id);
   }
 }
