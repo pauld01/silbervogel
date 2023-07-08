@@ -18,18 +18,23 @@ export class AeroportController {
     return this.aeroportService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.aeroportService.findById(id);
+  @Get(':code')
+  findByCode(@Param('code') code: string) {
+    return this.aeroportService.findByCode(code);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAeroportDto: UpdateAeroportDto) {
-    return this.aeroportService.update(id, updateAeroportDto);
+  @Get(':name')
+  findByName(@Param('name') name: string) {
+    return this.aeroportService.findByName(name);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.aeroportService.remove(id);
+  @Patch(':code')
+  update(@Param('code') code: string, @Body() updateAeroportDto: UpdateAeroportDto) {
+    return this.aeroportService.update(code, updateAeroportDto);
+  }
+
+  @Delete(':code')
+  remove(@Param('code') code: string) {
+    return this.aeroportService.remove(code);
   }
 }
