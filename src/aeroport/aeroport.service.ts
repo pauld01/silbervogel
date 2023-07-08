@@ -40,7 +40,7 @@ export class AeroportService {
       .exec();
   }
 
-  async remove(id: string): Promise<AeroportDocument> {
-    return this.aeroportModel.findByIdAndDelete(id).exec();
+  async remove(id: string) {
+      this.aeroportModel.findByIdAndDelete(id).exec();
   }
 }
