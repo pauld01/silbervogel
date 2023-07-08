@@ -20,5 +20,4 @@ export class Avion {
   @Prop()
   refreshToken: string;
 }
-
 export const AvionSchema = SchemaFactory.createForClass(Avion);
