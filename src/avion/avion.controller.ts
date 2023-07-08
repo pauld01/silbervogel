@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { AvionService } from './avion.service';
 import { CreateAvionDto } from './dto/create-avion.dto';
 import { DeleteAvionDto } from './dto/delete-avion.dto';
 import { UpdateAvionDto } from './dto/update-avion.dto';
+
 
 @Controller('avion')
 export class AvionController {
@@ -16,6 +17,14 @@ export class AvionController {
   @Get()
   findAll() {
     return this.avionService.findAll();
+  }
+
+  @Get('/filter')
+  async findMany(@Query('model') model: string, @Query('brand') brand: string) {
+    const byBrand = await this.avionService.findByBrand(brand);
+    const byModel = await this.avionService.findByModel(model);
+
+    return [...byBrand, ...byModel];
   }
 
   @Get(':identification')

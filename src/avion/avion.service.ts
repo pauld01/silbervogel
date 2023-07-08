@@ -23,11 +23,11 @@ export class AvionService {
   }
 
   async findByBrand(brand: string): Promise<AvionDocument[]> {
-    return this.avionModel.find({ brand }).exec();
+    return await this.avionModel.find({ brand }).exec();
   }
 
   async findByModel(model: string): Promise<AvionDocument[]> {
-    return this.avionModel.find({ model }).exec();
+    return await this.avionModel.find({ model: { $eq: model } }).exec();
   }
 
   async findByCompany(company: string): Promise<AvionDocument> {
