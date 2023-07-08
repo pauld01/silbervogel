@@ -1,4 +1,4 @@
 export class CreateAeroportDto {
-    id: string;
+    code: string;
     refreshToken?: string;
 }

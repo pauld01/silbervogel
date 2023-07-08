@@ -1,5 +1,5 @@
 export class CreateAeroportDto {
-    id: string;
+    code: string;
     name: string;
     country: string;
     city: string;
