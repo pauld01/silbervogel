@@ -5,7 +5,7 @@ export type AvionDocument = Avion & Document;
 
 @Schema()
 export class Avion {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   identification: string;
 
   @Prop({ required: true })
@@ -20,5 +20,4 @@ export class Avion {
   @Prop()
   refreshToken: string;
 }
-
 export const AvionSchema = SchemaFactory.createForClass(Avion);
