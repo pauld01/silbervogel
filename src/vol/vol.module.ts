@@ -4,12 +4,15 @@ import { VolService } from './vol.service';
 import { VolController } from './vol.controller';
 import { Vol, VolSchema } from './schemas/vol.schemas';
 import { ConfigModule } from '@nestjs/config';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Vol.name, schema: VolSchema }]),
     MongooseModule.forRoot(process.env.DB_URL_VOL),
-    ConfigModule.forRoot(),
   ],
   controllers: [VolController],
   providers: [VolService],
