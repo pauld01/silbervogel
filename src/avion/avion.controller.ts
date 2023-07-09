@@ -27,11 +27,9 @@ export class AvionController {
     return [...byModel, ...byBrand, byCompany];
   }
 
-  @Get()
-  async findOne(@Query('identification') identification: string) {
-    const byIdentification = await this.avionService.findByIdentification(identification);
-    console.log("identification : ", identification);
-    return [byIdentification]
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.avionService.findOne(id);
   }
 
   @Patch(':identification')
