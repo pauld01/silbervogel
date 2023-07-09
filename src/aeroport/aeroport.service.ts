@@ -27,7 +27,7 @@ export class AeroportService {
   }
   
   async findByCountry(country: string): Promise<AeroportDocument[]> {
-    return await this.aeroportModel.find({ country }).exec();
+    return await this.aeroportModel.find({ country: {$eq: country}}).exec();
   }
 
   async findByCity(city: string): Promise<AeroportDocument[]> {

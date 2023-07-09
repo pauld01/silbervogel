@@ -30,8 +30,8 @@ export class AvionService {
     return await this.avionModel.find({ model: { $eq: model } }).exec();
   }
 
-  async findByCompany(company: string): Promise<AvionDocument> {
-    return this.avionModel.findOne({ company }).exec();
+  async findByCompany(company: string): Promise<AvionDocument[]> {
+    return await this.avionModel.find({ company: {$eq: company} }).exec();
   }
 
   async update(
