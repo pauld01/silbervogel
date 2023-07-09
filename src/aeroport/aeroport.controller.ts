@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { AeroportService } from './aeroport.service';
 import { CreateAeroportDto } from './dto/create-aeroport.dto';
 import { UpdateAeroportDto } from './dto/update-aeroport.dto';
@@ -26,6 +26,14 @@ export class AeroportController {
   @Get(':name')
   findByName(@Param('name') name: string) {
     return this.aeroportService.findByName(name);
+  }
+
+  @Get('/filter')
+  async findMany(@Query('country') country: string, @Query('city') city: string) {
+    const byCountry = await this.aeroportService.findByCountry(country);
+    const byCity = await this.aeroportService.findByCity(city);
+    
+    return [...byCountry, ...byCity];
   }
 
   @Patch(':code')

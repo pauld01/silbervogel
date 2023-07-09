@@ -25,13 +25,13 @@ export class AeroportService {
   async findByName(name: string): Promise<AeroportDocument> {
     return this.aeroportModel.findById({name});
   }
-
+  
   async findByCountry(country: string): Promise<AeroportDocument[]> {
-    return this.aeroportModel.find({ country }).exec();
+    return await this.aeroportModel.find({ country }).exec();
   }
 
   async findByCity(city: string): Promise<AeroportDocument[]> {
-    return this.aeroportModel.find({ city }).exec();
+    return await this.aeroportModel.find({ city }).exec();
   }
 
   async update(code: string, updateAeroportDto: UpdateAeroportDto): Promise<AeroportDocument> {
