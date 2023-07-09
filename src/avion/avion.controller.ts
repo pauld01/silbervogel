@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { AvionService } from './avion.service';
 import { CreateAvionDto } from './dto/create-avion.dto';
-import { DeleteAvionDto } from './dto/delete-avion.dto';
 import { UpdateAvionDto } from './dto/update-avion.dto';
 
 
@@ -20,16 +19,19 @@ export class AvionController {
   }
 
   @Get('/filter')
-  async findMany(@Query('model') model: string, @Query('brand') brand: string) {
+  async findMany(@Query('model') model: string, @Query('brand') brand: string, @Query('company') company: string) {
     const byModel = await this.avionService.findByModel(model);
     const byBrand = await this.avionService.findByBrand(brand);
+    const byCompany = await this.avionService.findByCompany(company);
     
-    return [...byModel, ...byBrand];
+    return [...byModel, ...byBrand, byCompany];
   }
 
-  @Get(':identification')
-  findOne(@Param('identification') identification: string) {
-    return this.avionService.findByIdentification(identification);
+  @Get()
+  async findOne(@Query('identification') identification: string) {
+    const byIdentification = await this.avionService.findByIdentification(identification);
+    console.log("identification : ", identification);
+    return [byIdentification]
   }
 
   @Patch(':identification')

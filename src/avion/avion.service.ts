@@ -19,7 +19,7 @@ export class AvionService {
   }
 
   async findByIdentification(identification: string): Promise<AvionDocument> {
-    return this.avionModel.findById(identification);
+    return await this.avionModel.findOne({ identification }).exec();
   }
 
   async findByBrand(brand: string): Promise<AvionDocument[]> {
