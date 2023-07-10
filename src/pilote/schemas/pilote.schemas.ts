@@ -14,7 +14,7 @@ export class Pilote {
   name: string;
 
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
 
   surname: string;
 

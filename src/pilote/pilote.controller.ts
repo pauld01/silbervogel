@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { PiloteService } from './pilote.service';
 import { CreatePiloteDto } from './dto/create-pilote.dto';
 import { UpdatePiloteDto } from './dto/update-pilote.dto';
@@ -22,6 +22,23 @@ export class PiloteController {
   findOne(@Param('id') id: string) {
     return this.piloteService.findOne(id);
   }
+
+  @Get('/filter')
+  async findMany(@Query('name') name: string, @Query('surname') surname: string) {
+    const filter: any = {};
+
+    if (name) {
+      filter.name = name;
+    }
+
+    if (surname) {
+      filter.surname = surname;
+    }
+
+    const results = await this.piloteService.findByFilter(filter);
+    return results;
+  }
+
 
   /*@Get(':id/avions')
   getPiloteAvions(@Param('id') id: number) {

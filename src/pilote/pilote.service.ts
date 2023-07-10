@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CreatePiloteDto } from './dto/create-pilote.dto';
 import { UpdatePiloteDto } from './dto/update-pilote.dto';
 import { PiloteDocument } from './schemas/pilote.schemas';
-import { Model } from 'mongoose';
+import { Model, ObjectId  } from 'mongoose';
 import { Pilote } from './entities/pilote.entity';
 
 @Injectable()
@@ -39,9 +39,7 @@ export class PiloteService {
    * @returns 
    */
   async findAll(): Promise<PiloteDocument[]> {
-
     return this.piloteModel.find().exec();
-
   }
 
   /**
@@ -50,9 +48,7 @@ export class PiloteService {
    * @returns 
    */
   async findOne(id: string): Promise<PiloteDocument> {
-
     return this.piloteModel.findById(id);
-
   }
 
   /**
@@ -60,21 +56,25 @@ export class PiloteService {
    * @param name 
    * @returns 
    */
-  async findByName(name: string): Promise<PiloteDocument> {
-
-    return this.piloteModel.findOne({ name }).exec();
-
+  async findByName(name: string): Promise<PiloteDocument[]> {
+    return this.piloteModel.aggregate([
+      { $match: { name } },
+      { $project: { _id: 0 } }
+    ]).exec();
   }
+
+  async findByFilter(filter: any): Promise<PiloteDocument[]> {
+    return this.piloteModel.find(filter).exec();
+  }
+
 
   /**
    * This action returns a pilote depending of his surname
    * @param surname 
    * @returns 
    */
-  async findBySurname(surname: string): Promise<PiloteDocument> {
-
-    return this.piloteModel.findOne({ surname }).exec();
-
+  async findBySurname(surname: string): Promise<PiloteDocument[]> {
+    return this.piloteModel.find({ surname }, { _id: 0 }).exec();
   }
 
   /**
@@ -84,9 +84,7 @@ export class PiloteService {
    * @returns 
    */
   async update(id: string, UpdatePiloteDto: UpdatePiloteDto): Promise<PiloteDocument> {
-
     return this.piloteModel.findByIdAndUpdate(id, UpdatePiloteDto, { new: true }).exec();
-
   }
 
   /**
