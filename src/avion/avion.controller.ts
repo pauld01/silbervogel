@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { AvionService } from './avion.service';
 import { CreateAvionDto } from './dto/create-avion.dto';
 import { UpdateAvionDto } from './dto/update-avion.dto';
+import { combineLatest } from 'rxjs';
 
 
 @Controller('avion')
@@ -20,11 +21,11 @@ export class AvionController {
 
   @Get('/filter')
   async findMany(@Query('model') model: string, @Query('brand') brand: string, @Query('company') company: string) {
-    const byModel = await this.avionService.findByModel(model);
     const byBrand = await this.avionService.findByBrand(brand);
+    const byModel = await this.avionService.findByModel(model);
     const byCompany = await this.avionService.findByCompany(company);
-    
-    return [...byModel, ...byBrand, byCompany];
+
+    return [...byBrand, ...byModel, ...byCompany];
   }
 
   @Get(':id')

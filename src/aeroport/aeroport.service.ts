@@ -19,19 +19,19 @@ export class AeroportService {
   }
 
   async findByCode(code: string): Promise<AeroportDocument> {
-    return this.aeroportModel.findById(code);
+    return this.aeroportModel.findOne({code}).exec();
   }
 
   async findByName(name: string): Promise<AeroportDocument> {
-    return this.aeroportModel.findById({name});
+    return this.aeroportModel.findOne({name}).exec();
   }
   
   async findByCountry(country: string): Promise<AeroportDocument[]> {
-    return await this.aeroportModel.find({ country }).exec();
+    return await this.aeroportModel.find({ country: country }).exec();
   }
 
   async findByCity(city: string): Promise<AeroportDocument[]> {
-    return await this.aeroportModel.find({ city }).exec();
+    return await this.aeroportModel.find({ city: city }).exec();
   }
 
   async update(code: string, updateAeroportDto: UpdateAeroportDto): Promise<AeroportDocument> {

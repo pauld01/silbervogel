@@ -23,17 +23,19 @@ export class AeroportController {
     return this.aeroportService.findByCode(code);
   }
 
-  @Get(':name')
+  @Get('name/:name')
   findByName(@Param('name') name: string) {
     return this.aeroportService.findByName(name);
   }
 
-  @Get('/filter')
-  async findMany(@Query('country') country: string, @Query('city') city: string) {
-    const byCountry = await this.aeroportService.findByCountry(country);
-    const byCity = await this.aeroportService.findByCity(city);
-    
-    return [...byCountry, ...byCity];
+  @Get('country/:country')
+  findByCountry(@Param('country') country: string) {
+    return this.aeroportService.findByCountry(country);
+  }
+
+  @Get('city/:city')
+  findByCity(@Param('city') city: string) {
+    return this.aeroportService.findByCity(city);
   }
 
   @Patch(':code')
