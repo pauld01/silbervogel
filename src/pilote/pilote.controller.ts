@@ -3,7 +3,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { PiloteService } from './pilote.service';
 import { CreatePiloteDto } from './dto/create-pilote.dto';
 import { UpdatePiloteDto } from './dto/update-pilote.dto';
-
+import { channelWrapper } from "../main";
 @Controller('pilote')
 export class PiloteController {
   constructor(private readonly piloteService: PiloteService) {}
@@ -42,4 +42,26 @@ export class PiloteController {
   remove(@Param('id') id: string) {
     return this.piloteService.remove(id);
   }
+
+  @Get(':id/avions')
+  async getAvionsPiloteId(@Param('id') id: string) {
+    // get pilot by idd and add data to message send queue
+    const pilote = await this.piloteService.findOne(id);
+    if(pilote) {
+      channelWrapper
+      .sendToQueue('avions_queue', { "data" : {
+        idPilote : id,
+        name : pilote.name,
+        surname : pilote.surname,
+      }})
+      .then(function () {
+        return console.log('Message was sent!  Hooray!');
+      })
+      .catch(function (err) {
+        return console.log('Message was rejected...  Boo!');
+      });
+    }
+  }
+
+
 }
