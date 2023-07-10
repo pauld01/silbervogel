@@ -22,8 +22,8 @@ export class AeroportService {
     return this.aeroportModel.findOne({code}).exec();
   }
 
-  async findByName(name: string): Promise<AeroportDocument[]> {
-    return this.aeroportModel.find({name: name}).exec();
+  async findByName(name: string): Promise<AeroportDocument> {
+    return this.aeroportModel.findOne({name}).exec();
   }
   
   async findByCountry(country: string): Promise<AeroportDocument[]> {
