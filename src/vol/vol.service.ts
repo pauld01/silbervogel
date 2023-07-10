@@ -30,6 +30,10 @@ export class VolService {
     return this.volModel.findOne({ flightNumber, departureDate }).exec();
   }
 
+  async findManyByOpCode(operatingAirlineCode: string): Promise<VolDocument[]> {
+    return this.volModel.find({ operatingAirlineCode }).exec();
+  }
+
   async update(
     flightNumber: string,
     departureDate: string,
