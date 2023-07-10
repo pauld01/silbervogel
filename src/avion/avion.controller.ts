@@ -26,9 +26,9 @@ export class AvionController {
     return [...byBrand, ...byModel, ...byCompany];
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.avionService.findOne(id);
+  @Get(':identification')
+  findByIdentification(@Param('identification') identification: string) {
+    return this.avionService.findByIdentification(identification);
   }
 
   @Patch(':identification')
