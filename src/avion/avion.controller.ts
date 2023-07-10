@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { AvionService } from './avion.service';
 import { CreateAvionDto } from './dto/create-avion.dto';
 import { UpdateAvionDto } from './dto/update-avion.dto';
+import { concat } from 'rxjs';
 import { combineLatest } from 'rxjs';
-
 
 @Controller('avion')
 export class AvionController {
@@ -32,6 +32,21 @@ export class AvionController {
   findOne(@Param('id') id: string) {
     return this.avionService.findOne(id);
   }
+
+  @Get(':model')
+  findMany(@Param('model') model: string) {
+    return this.avionService.findByModel(model);
+  }
+
+  // @Get(':brand')
+  // findByBrand(@Param('brand') brand: string) {
+  //   return this.avionService.findByBrand(brand);
+  // }
+
+  // @Get(':company')
+  // findByCompany(@Param('company') company: string) {
+  //   return this.avionService.findByCompany(company);
+  // }
 
   @Patch(':identification')
   update(@Param('identification') identification: string, @Body() updateAvionDto: UpdateAvionDto) {
