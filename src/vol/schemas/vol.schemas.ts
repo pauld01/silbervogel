@@ -11,6 +11,9 @@ export class Vol {
   @Prop({ required: true, unique: true })
   flightNumber: string;
 
+  @Prop({ required: false })
+  airportCode: string;
+
   @Prop({ required: true })
   operatingAirlineCode: string;
 
@@ -26,11 +29,11 @@ export class Vol {
   @Prop({ required: true })
   duration: number;
 
-  @Prop({ required: true })
-  aircraftRegistration: string;
+  @Prop({ required: false })
+  aircraftId: string;
 
-  @Prop({ required: true })
-  aircraftType: string;
+  @Prop({ required: false })
+  pilotId: string;
 
   @Prop({ required: true })
   passengers: number;
