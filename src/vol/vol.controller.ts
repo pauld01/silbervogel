@@ -28,29 +28,25 @@ export class VolController {
   @Get(':flightNumber/:departureDate')
   findOne(
     @Param('flightNumber') flightNumber: string,
-    @Param('departureDate') departureDate: Date,
+    @Param('departureDate') departureDate: string,
   ) {
-    return this.volService.findOne(flightNumber, new Date(departureDate));
+    return this.volService.findOne(flightNumber, departureDate);
   }
 
   @Patch(':flightNumber/:departureDate')
   update(
     @Param('flightNumber') flightNumber: string,
-    @Param('departureDate') departureDate: Date,
+    @Param('departureDate') departureDate: string,
     @Body() updateVolDto: UpdateVolDto,
   ) {
-    return this.volService.update(
-      flightNumber,
-      new Date(departureDate),
-      updateVolDto,
-    );
+    return this.volService.update(flightNumber, departureDate, updateVolDto);
   }
 
   @Delete(':flightNumber/:departureDate')
   remove(
     @Param('flightNumber') flightNumber: string,
-    @Param('departureDate') departureDate: Date,
+    @Param('departureDate') departureDate: string,
   ) {
-    return this.volService.remove(flightNumber, new Date(departureDate));
+    return this.volService.remove(flightNumber, departureDate);
   }
 }

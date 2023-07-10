@@ -25,14 +25,14 @@ export class VolService {
 
   async findOne(
     flightNumber: string,
-    departureDate: Date,
+    departureDate: string,
   ): Promise<VolDocument> {
     return this.volModel.findById(flightNumber, departureDate).exec();
   }
 
   async update(
     flightNumber: string,
-    departureDate: Date,
+    departureDate: string,
     updateVolDto: UpdateVolDto,
   ): Promise<VolDocument> {
     return this.volModel
@@ -44,7 +44,7 @@ export class VolService {
 
   async remove(
     flightNumber: string,
-    departureDate: Date,
+    departureDate: string,
   ): Promise<VolDocument> {
     return this.volModel
       .findByIdAndDelete({ flightNumber, departureDate })

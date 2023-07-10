@@ -7,9 +7,13 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class AeroportService {
-  constructor(@InjectModel(Aeroport.name) private aeroportModel: Model<AeroportDocument>) {}
+  constructor(
+    @InjectModel(Aeroport.name) private aeroportModel: Model<AeroportDocument>,
+  ) {}
 
-  async create(createAeroportDto: CreateAeroportDto): Promise<AeroportDocument> {
+  async create(
+    createAeroportDto: CreateAeroportDto,
+  ): Promise<AeroportDocument> {
     const createdAeroport = new this.aeroportModel(createAeroportDto);
     return createdAeroport.save();
   }
@@ -36,11 +40,11 @@ export class AeroportService {
 
   async update(code: string, updateAeroportDto: UpdateAeroportDto): Promise<AeroportDocument> {
     return this.aeroportModel
-      .findByIdAndUpdate(code, updateAeroportDto, { new: true })
+      .findOneAndUpdate({code}, updateAeroportDto, { new: true })
       .exec();
   }
 
   async remove(code: string) {
-    this.aeroportModel.findByIdAndDelete(code).exec();
+    this.aeroportModel.findOneAndDelete({code}).exec();
   }
 }
