@@ -14,10 +14,10 @@ export class Vol {
   @Prop({ required: true })
   operatingAirlineCode: string;
 
-  @Prop({ required: false })
+  @Prop({ required: true })
   departureAirportCode: string;
 
-  @Prop({ required: false })
+  @Prop({ required: true })
   arrivalAirportCode: string;
 
   @Prop({ required: true })
