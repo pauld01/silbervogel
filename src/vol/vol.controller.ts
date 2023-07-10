@@ -33,6 +33,11 @@ export class VolController {
     return this.volService.findOne(flightNumber, departureDate);
   }
 
+  @Get('operatingCode/:operatingAirlineCode')
+  find(@Param('operatingAirlineCode') operatingAirlineCode: string) {
+    return this.volService.findManyByOpCode(operatingAirlineCode);
+  }
+
   @Patch(':flightNumber/:departureDate')
   update(
     @Param('flightNumber') flightNumber: string,

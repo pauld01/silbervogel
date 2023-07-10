@@ -27,7 +27,11 @@ export class VolService {
     flightNumber: string,
     departureDate: string,
   ): Promise<VolDocument> {
-    return this.volModel.findById(flightNumber, departureDate).exec();
+    return this.volModel.findOne({ flightNumber, departureDate }).exec();
+  }
+
+  async findManyByOpCode(operatingAirlineCode: string): Promise<VolDocument[]> {
+    return this.volModel.find({ operatingAirlineCode }).exec();
   }
 
   async update(
@@ -36,7 +40,7 @@ export class VolService {
     updateVolDto: UpdateVolDto,
   ): Promise<VolDocument> {
     return this.volModel
-      .findByIdAndUpdate({ flightNumber, departureDate }, updateVolDto, {
+      .findOneAndUpdate({ flightNumber, departureDate }, updateVolDto, {
         new: true,
       })
       .exec();
@@ -47,7 +51,7 @@ export class VolService {
     departureDate: string,
   ): Promise<VolDocument> {
     return this.volModel
-      .findByIdAndDelete({ flightNumber, departureDate })
+      .findOneAndDelete({ flightNumber, departureDate })
       .exec();
   }
 }
