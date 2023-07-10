@@ -23,27 +23,15 @@ export class PiloteController {
     return this.piloteService.findOne(id);
   }
 
-  @Get('/filter')
-  async findMany(@Query('name') name: string, @Query('surname') surname: string) {
-    const filter: any = {};
-
-    if (name) {
-      filter.name = name;
-    }
-
-    if (surname) {
-      filter.surname = surname;
-    }
-
-    const results = await this.piloteService.findByFilter(filter);
-    return results;
+  @Get('name/:name')
+  findByName(@Param('name') name: string) {
+    return this.piloteService.findByName(name);
   }
 
-
-  /*@Get(':id/avions')
-  getPiloteAvions(@Param('id') id: number) {
-    return this.piloteService.getPiloteAvions(id);
-  }*/
+  @Get('surname/:surname')
+  findBySurname(@Param('surname') name: string) {
+    return this.piloteService.findBySurname(name);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePiloteDto: UpdatePiloteDto) {
