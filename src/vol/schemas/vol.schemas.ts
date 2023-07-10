@@ -27,7 +27,7 @@ export class Vol {
   arrivalCity: string;
 
   @Prop({ required: true })
-  departureDate: Date;
+  departureDate: string;
 
   @Prop({ required: true })
   duration: number;
