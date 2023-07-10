@@ -11,7 +11,7 @@ export type AeroportDocument = Aeroport & Document;
 export class Aeroport {
 
   @Prop({ required: true, unique: true })
-  id: string;
+  code: string;
 
   @Prop({ required: true })
   name: string;

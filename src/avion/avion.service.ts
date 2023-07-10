@@ -18,20 +18,24 @@ export class AvionService {
     return this.avionModel.find().exec();
   }
 
+  async findOne(id: string): Promise<AvionDocument>{
+    return this.avionModel.findById(id);
+  }
+
   async findByIdentification(identification: string): Promise<AvionDocument> {
-    return this.avionModel.findById(identification);
+    return await this.avionModel.findOne({ identification }).exec();
   }
 
   async findByBrand(brand: string): Promise<AvionDocument[]> {
-    return this.avionModel.find({ brand }).exec();
+    return await this.avionModel.find({ brand }).exec();
   }
 
   async findByModel(model: string): Promise<AvionDocument[]> {
-    return this.avionModel.find({ model }).exec();
+    return await this.avionModel.find({ model: { $eq: model } }).exec();
   }
 
-  async findByCompany(company: string): Promise<AvionDocument> {
-    return this.avionModel.findOne({ company }).exec();
+  async findByCompany(company: string): Promise<AvionDocument[]> {
+    return await this.avionModel.find({ company: {$eq: company} }).exec();
   }
 
   async update(

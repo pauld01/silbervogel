@@ -18,29 +18,29 @@ export class AeroportService {
     return this.aeroportModel.find().exec();
   }
 
-  async findById(id: string): Promise<AeroportDocument> {
-    return this.aeroportModel.findById(id);
+  async findByCode(code: string): Promise<AeroportDocument> {
+    return this.aeroportModel.findOne({code}).exec();
   }
 
   async findByName(name: string): Promise<AeroportDocument> {
-    return this.aeroportModel.findOne({ name }).exec();
+    return this.aeroportModel.findOne({name}).exec();
   }
-
+  
   async findByCountry(country: string): Promise<AeroportDocument[]> {
-    return this.aeroportModel.find({ country }).exec();
+    return await this.aeroportModel.find({ country: country }).exec();
   }
 
   async findByCity(city: string): Promise<AeroportDocument[]> {
-    return this.aeroportModel.find({ city }).exec();
+    return await this.aeroportModel.find({ city: city }).exec();
   }
 
-  async update(id: string, updateAeroportDto: UpdateAeroportDto): Promise<AeroportDocument> {
+  async update(code: string, updateAeroportDto: UpdateAeroportDto): Promise<AeroportDocument> {
     return this.aeroportModel
-      .findByIdAndUpdate(id, updateAeroportDto, { new: true })
+      .findByIdAndUpdate(code, updateAeroportDto, { new: true })
       .exec();
   }
 
-  async remove(id: string): Promise<AeroportDocument> {
-    return this.aeroportModel.findByIdAndDelete(id).exec();
+  async remove(code: string) {
+    this.aeroportModel.findByIdAndDelete(code).exec();
   }
 }
