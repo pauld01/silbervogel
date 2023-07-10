@@ -40,11 +40,11 @@ export class AeroportService {
 
   async update(code: string, updateAeroportDto: UpdateAeroportDto): Promise<AeroportDocument> {
     return this.aeroportModel
-      .findByIdAndUpdate(code, updateAeroportDto, { new: true })
+      .findOneAndUpdate({code}, updateAeroportDto, { new: true })
       .exec();
   }
 
   async remove(code: string) {
-    this.aeroportModel.findByIdAndDelete(code).exec();
+    this.aeroportModel.findOneAndDelete({code}).exec();
   }
 }
