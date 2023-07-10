@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { AvionService } from './avion.service';
 import { CreateAvionDto } from './dto/create-avion.dto';
-import { DeleteAvionDto } from './dto/delete-avion.dto';
 import { UpdateAvionDto } from './dto/update-avion.dto';
 import { combineLatest } from 'rxjs';
 
@@ -29,9 +28,9 @@ export class AvionController {
     return [...byBrand, ...byModel, ...byCompany];
   }
 
-  @Get(':identification')
-  findOne(@Param('identification') identification: string) {
-    return this.avionService.findByIdentification(identification);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.avionService.findOne(id);
   }
 
   @Patch(':identification')

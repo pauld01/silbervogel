@@ -3,10 +3,11 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PiloteModule } from './pilote/pilote.module';
+import { VolModule } from './vol/vol.module';
 import { AeroportModule } from './aeroport/aeroport.module';
 import { AvionModule } from './avion/avion.module';
 @Module({
-  imports: [PiloteModule,AeroportModule,AvionModule],
+  imports: [PiloteModule,AeroportModule,AvionModule,VolModule],
   controllers: [AppController],
   providers: [AppService],
 })
