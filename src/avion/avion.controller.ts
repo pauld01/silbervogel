@@ -3,6 +3,7 @@ import { AvionService } from './avion.service';
 import { CreateAvionDto } from './dto/create-avion.dto';
 import { DeleteAvionDto } from './dto/delete-avion.dto';
 import { UpdateAvionDto } from './dto/update-avion.dto';
+import { combineLatest } from 'rxjs';
 
 
 @Controller('avion')
@@ -20,11 +21,12 @@ export class AvionController {
   }
 
   @Get('/filter')
-  async findMany(@Query('model') model: string, @Query('brand') brand: string) {
+  async findMany(@Query('model') model: string, @Query('brand') brand: string, @Query('company') company: string) {
     const byBrand = await this.avionService.findByBrand(brand);
     const byModel = await this.avionService.findByModel(model);
+    const byCompany = await this.avionService.findByCompany(company);
 
-    return [...byBrand, ...byModel];
+    return [...byBrand, ...byModel, ...byCompany];
   }
 
   @Get(':identification')
