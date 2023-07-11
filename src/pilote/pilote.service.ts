@@ -12,16 +12,6 @@ export class PiloteService {
   constructor(@InjectModel(Pilote.name) private piloteModel: Model<PiloteDocument>) {}
 
   /**
-   * This action returns all aviosn from a pilote
-   * @param createPiloteDto
-   * @returns
-   */
-  /*async getPiloteAvions(id: string): Promise<AvionDocument[]> {
-    const pilote = await this.piloteModel.findById(id).exec();
-    return this.avionModel.find({ pilote: pilote._id }).exec();
-  }*/
-
-  /**
    * This action create an pilote
    * @param createPiloteDto 
    * @returns 
@@ -66,7 +56,6 @@ export class PiloteService {
   async findByFilter(filter: any): Promise<PiloteDocument[]> {
     return this.piloteModel.find(filter).exec();
   }
-
 
   /**
    * This action returns a pilote depending of his surname
