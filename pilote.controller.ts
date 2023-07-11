@@ -3,7 +3,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { PiloteService } from './pilote.service';
 import { CreatePiloteDto } from './dto/create-pilote.dto';
 import { UpdatePiloteDto } from './dto/update-pilote.dto';
-import channelWrapper from '../main';
+import { channelWrapper } from "../main";
 @Controller('pilote')
 export class PiloteController {
   constructor(private readonly piloteService: PiloteService) {}
@@ -45,6 +45,7 @@ export class PiloteController {
 
   @Get(':id/avions')
   async getAvionsPiloteId(@Param('id') id: string) {
+    // get pilot by idd and add data to message send queue
     const pilote = await this.piloteService.findOne(id);
     if(pilote) {
       channelWrapper
@@ -61,4 +62,6 @@ export class PiloteController {
       });
     }
   }
+
+
 }
