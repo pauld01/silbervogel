@@ -4,6 +4,8 @@ import { PiloteService } from './pilote.service';
 import { CreatePiloteDto } from './dto/create-pilote.dto';
 import { UpdatePiloteDto } from './dto/update-pilote.dto';
 import channelWrapper from '../main';
+import axios from 'axios';
+
 @Controller('pilote')
 export class PiloteController {
   constructor(private readonly piloteService: PiloteService) {}
@@ -59,6 +61,28 @@ export class PiloteController {
       .catch(function (err) {
         return console.log('Message was rejected...  Boo!');
       });
+    }
+  }
+
+  @Get(':id/vols')
+  async findVolsByPiloteId(@Param('id') id: string) {
+    const url_vols = 'http://localhost:3000/vol';
+
+    try {
+      // Obtenir tous les vols
+      const volsResponse = await axios.get(url_vols);
+      const vols = volsResponse.data;
+      
+      // Filtrer les vols en fonction de l'ID du pilote
+      const volsDuPilote = vols.filter((vol) => vol.pilotId === id);
+
+      // Afficher les vols correspondants
+      console.log(volsDuPilote);
+
+      return volsDuPilote;
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   }
 }
