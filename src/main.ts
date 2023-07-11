@@ -8,14 +8,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(3001);
 }
-bootstrap();
+bootstrap.then();
 
-var connection = amqp.connect(['amqp://localhost:3002']);
+var connection = amqp.connect(['amqp://localhost:3000', 'amqp://localhost:3002', 'amqp://localhost:3003']);
 var channelWrapper = connection.createChannel({
   json: true,
   setup: function (channel) {
     return channel.assertQueue('avions_queue', { durable: true });
-  },
+    },
 });
 
 export default channelWrapper;
